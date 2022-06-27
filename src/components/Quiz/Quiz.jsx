@@ -18,6 +18,27 @@ export default function Quiz() {
             correct_answer: "Sayounara",
             incorrect_answers: ["Hola", "Au Revoir", "Salir"],
         },
+        {
+            id: 3,
+            type: "multiple",
+            question: "How would one say goodbye in Japanese?",
+            correct_answer: "Sayounara",
+            incorrect_answers: ["Hola", "Au Revoir", "Salir"],
+        },
+        {
+            id: 4,
+            type: "multiple",
+            question: "How would one say goodbye in Japanese?",
+            correct_answer: "Sayounara",
+            incorrect_answers: ["Hola", "Au Revoir", "Salir"],
+        },
+        {
+            id: 5,
+            type: "multiple",
+            question: "How would one say goodbye in Japanese?",
+            correct_answer: "Sayounara",
+            incorrect_answers: ["Hola", "Au Revoir", "Salir"],
+        },
     ]);
     return (
         <div className={styles.quiz}>

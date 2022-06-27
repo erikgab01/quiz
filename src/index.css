@@ -6,11 +6,11 @@
 
 body {
     font-family: "Inter", sans-serif;
-    height: 100vh;
     background: url("blob_blue.png") no-repeat, url("blob_yellow.png") no-repeat;
     background-size: 300px, 300px;
     background-position: left bottom, right top;
     background-color: #f5f7fb;
+    height: 100vh;
 }
 
 .btn {
