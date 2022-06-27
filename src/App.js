@@ -1,9 +1,11 @@
+import Welcome from "./components/Welcome";
+
 function App() {
-  return (
-    <div>
-        Quiz
-    </div>
-  );
+    return (
+        <div>
+            <Welcome />
+        </div>
+    );
 }
 
 export default App;
