@@ -9,10 +9,12 @@
     font-size: 16px;
     line-height: 19px;
     color: #293264;
+    text-align: center;
 }
 
 .options {
     display: flex;
+    justify-content: center;
     gap: 13px;
     margin-top: 12px;
 }
@@ -27,6 +29,7 @@
     line-height: 12px;
     text-align: center;
     color: #293264;
+    cursor: pointer;
 }
 
 .options button.active {
@@ -37,11 +40,13 @@
     .options button {
         padding: 15px 30px;
         font-size: 20px;
+        line-height: 25px;
     }
     .title {
         font-size: 24px;
         margin-bottom: 40px;
         margin-top: 20px;
+        line-height: 30px;
     }
     .question {
         padding-bottom: 20px;

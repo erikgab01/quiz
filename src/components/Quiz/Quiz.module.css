@@ -1,11 +1,9 @@
 .quiz {
-    margin: 0 auto;
-    max-width: 400px;
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 14px;
-    padding: 20px 0;
+    padding: 20px 50px;
 }
 
 .checkButton {
@@ -21,11 +19,5 @@
     .checkButton {
         font-size: 26px;
         padding: 20px 90px;
-    }
-    .quiz {
-        max-width: 1000px;
-        display: flex;
-        flex-direction: column;
-        gap: 14px;
     }
 }

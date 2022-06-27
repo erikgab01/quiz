@@ -10,7 +10,7 @@ body {
     background-size: 300px, 300px;
     background-position: left bottom, right top;
     background-color: #f5f7fb;
-    height: 100vh;
+    min-height: 100vh;
 }
 
 .btn {
