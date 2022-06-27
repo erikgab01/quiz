@@ -12,3 +12,19 @@ body {
     background-position: left bottom, right top;
     background-color: #f5f7fb;
 }
+
+.btn {
+    background: #4d5b9e;
+    color: #f5f7fb;
+    text-align: center;
+    border: none;
+    cursor: pointer;
+}
+
+.btn:hover {
+    background: #6678d4;
+}
+
+.btn:active {
+    box-shadow: inset 5px 5px 10px -3px rgba(0, 0, 0, 0.7);
+}
