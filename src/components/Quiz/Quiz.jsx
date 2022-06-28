@@ -9,7 +9,8 @@ export default function Quiz(props) {
     const [correctQuestions, setCorrectQuestions] = useState(0);
 
     useEffect(() => {
-        fetch("https://opentdb.com/api.php?amount=3")
+        let category = props.categoryId !== 0 ? `&category=${props.categoryId}` : "";
+        fetch(`https://opentdb.com/api.php?amount=${props.amount}${category}`)
             .then((response) => response.json())
             .then((data) => {
                 let questions = data.results.map((question) => {
@@ -28,7 +29,7 @@ export default function Quiz(props) {
                 console.log(questions);
                 setQuestions(questions);
             });
-    }, []);
+    }, [props.amount, props.categoryId]);
 
     function shuffleArray(array) {
         for (let i = array.length - 1; i > 0; i--) {

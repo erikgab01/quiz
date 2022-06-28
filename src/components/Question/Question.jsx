@@ -2,6 +2,8 @@ import React from "react";
 import styles from "./Question.module.css";
 
 export default function Question(props) {
+    // Need something to render special html codes
+    // because react cant do this
     const entities = {
         "&#039;": "'",
         "&quot;": '"',

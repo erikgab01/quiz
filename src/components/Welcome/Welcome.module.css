@@ -22,7 +22,7 @@
     line-height: 19px;
     text-align: center;
     color: #293264;
-    margin-bottom: 30px;
+    margin-bottom: 20px;
 }
 
 .startButton {
@@ -31,6 +31,30 @@
     font-weight: 500;
     font-size: 16px;
     line-height: 19px;
+    margin-top: 30px;
+}
+
+.optionList {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.optionList p {
+    font-size: 16px;
+    text-align: center;
+}
+
+.optionList select,
+.optionList input {
+    font-size: 12px;
+    text-indent: 5px;
+    border-radius: 5px;
+    padding: 5px 0;
+}
+.optionList label {
+    font-size: 12px;
 }
 
 @media screen and (min-width: 600px) {
@@ -41,11 +65,29 @@
 
     .description {
         font-size: 32px;
-        margin-bottom: 60px;
     }
 
     .startButton {
         font-size: 26px;
         padding: 20px 90px;
+        margin-top: 60px;
+    }
+    .optionList {
+        gap: 10px;
+        margin-top: 20px;
+    }
+
+    .optionList p {
+        font-size: 24px;
+    }
+
+    .optionList select,
+    .optionList input {
+        font-size: 16px;
+        padding: 10px 0;
+        text-indent: 10px;
+    }
+    .optionList label {
+        font-size: 18px;
     }
 }
