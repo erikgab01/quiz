@@ -7,7 +7,7 @@ function App() {
     return (
         <div>
             {!quizState && <Welcome setQuizState={() => setQuizState(true)} />}
-            {quizState && <Quiz />}
+            {quizState && <Quiz playAgain={() => setQuizState(false)} />}
         </div>
     );
 }

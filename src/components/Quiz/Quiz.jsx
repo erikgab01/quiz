@@ -3,8 +3,10 @@ import Question from "../Question/Question";
 import styles from "./Quiz.module.css";
 import { nanoid } from "nanoid";
 
-export default function Quiz() {
+export default function Quiz(props) {
     const [questions, setQuestions] = useState([]);
+    const [gameEnded, setGameEnded] = useState(false);
+    const [correctQuestions, setCorrectQuestions] = useState(0);
 
     useEffect(() => {
         fetch("https://opentdb.com/api.php?amount=3")
@@ -15,6 +17,7 @@ export default function Quiz() {
                     let answers = answerList.map((answer) => {
                         return { id: nanoid(), title: answer, selected: false };
                     });
+                    shuffleArray(answers);
                     return {
                         id: nanoid(),
                         question: question.question,
@@ -22,9 +25,17 @@ export default function Quiz() {
                         answers: answers,
                     };
                 });
+                console.log(questions);
                 setQuestions(questions);
             });
     }, []);
+
+    function shuffleArray(array) {
+        for (let i = array.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [array[i], array[j]] = [array[j], array[i]];
+        }
+    }
 
     function setSelected(event, questionId, answerId) {
         setQuestions((oldQuestions) =>
@@ -43,6 +54,20 @@ export default function Quiz() {
         );
     }
 
+    function checkAnswers() {
+        let correctQuestion = 0;
+        questions.forEach((question) => {
+            let correct = question.answers.find(
+                (answer) => answer.selected && answer.title === question.correctAnswer
+            );
+            if (correct) {
+                correctQuestion++;
+            }
+        });
+        setCorrectQuestions(correctQuestion);
+        setGameEnded(true);
+    }
+
     return (
         <div className={styles.quiz}>
             {questions.map((question) => (
@@ -53,9 +78,23 @@ export default function Quiz() {
                     correctAnswer={question.correctAnswer}
                     answers={question.answers}
                     setSelected={setSelected}
+                    gameEnded={gameEnded}
                 />
             ))}
-            <button className={styles.checkButton + " btn"}>Check answers</button>
+            {!gameEnded ? (
+                <button onClick={checkAnswers} className={styles.checkButton + " btn"}>
+                    Check answers
+                </button>
+            ) : (
+                <>
+                    <p>
+                        You scored {correctQuestions}/{questions.length} correct answers
+                    </p>
+                    <button onClick={props.playAgain} className={styles.checkButton + " btn"}>
+                        Play again
+                    </button>
+                </>
+            )}
         </div>
     );
 }

@@ -33,7 +33,15 @@
 }
 
 .options button.active {
-    background: #d6dbf5;
+    background-color: #d6dbf5;
+}
+
+.options button.incorrect {
+    background-color: #f8bcbc;
+}
+
+.options button.correct {
+    background-color: #94d7a2;
 }
 
 @media screen and (min-width: 800px) {
