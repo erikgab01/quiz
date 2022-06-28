@@ -1,8 +1,18 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./Welcome.module.css";
-import categories from "../../catergories.js";
+import { useLoading } from "react-use-loading";
 
 export default function Welcome(props) {
+    const [{ isLoading }, { stop }] = useLoading(true);
+    const [categoryList, setCategoryList] = useState([]);
+    useEffect(() => {
+        fetch("https://opentdb.com/api_category.php")
+            .then((response) => response.json())
+            .then((data) => {
+                setCategoryList(data.trivia_categories);
+                stop();
+            });
+    }, [stop]);
     function handleChangeCategory(event) {
         props.setSettings((oldSettings) => {
             return { ...oldSettings, category: event.target.value };
@@ -13,7 +23,9 @@ export default function Welcome(props) {
             return { ...oldSettings, amount: event.target.value };
         });
     }
-    return (
+    return isLoading ? (
+        <div></div>
+    ) : (
         <section className={styles.welcome}>
             <h1 className={styles.title}>Quizzical</h1>
             <p className={styles.description}>A simple quiz game</p>
@@ -22,7 +34,7 @@ export default function Welcome(props) {
                 <label htmlFor="category">Select category</label>
                 <select id="category" value={props.settings.category} onChange={handleChangeCategory}>
                     <option value={0}>Any</option>
-                    {categories.map((category) => (
+                    {categoryList.map((category) => (
                         <option key={category.id} value={category.id}>
                             {category.name}
                         </option>

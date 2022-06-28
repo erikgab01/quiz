@@ -2,11 +2,13 @@ import React, { useState, useEffect } from "react";
 import Question from "../Question/Question";
 import styles from "./Quiz.module.css";
 import { nanoid } from "nanoid";
+import { useLoading } from "react-use-loading";
 
 export default function Quiz(props) {
     const [questions, setQuestions] = useState([]);
     const [gameEnded, setGameEnded] = useState(false);
     const [correctQuestions, setCorrectQuestions] = useState(0);
+    const [{ isLoading }, { stop }] = useLoading(true);
 
     useEffect(() => {
         let category = props.categoryId !== 0 ? `&category=${props.categoryId}` : "";
@@ -28,8 +30,9 @@ export default function Quiz(props) {
                 });
                 console.log(questions);
                 setQuestions(questions);
+                stop();
             });
-    }, [props.amount, props.categoryId]);
+    }, [props.amount, props.categoryId, stop]);
 
     function shuffleArray(array) {
         for (let i = array.length - 1; i > 0; i--) {
@@ -69,7 +72,9 @@ export default function Quiz(props) {
         setGameEnded(true);
     }
 
-    return (
+    return isLoading ? (
+        <div></div>
+    ) : (
         <div className={styles.quiz}>
             {questions.map((question) => (
                 <Question
