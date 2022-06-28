@@ -28,7 +28,6 @@ export default function Quiz(props) {
                         answers: answers,
                     };
                 });
-                console.log(questions);
                 setQuestions(questions);
                 stop();
             });
