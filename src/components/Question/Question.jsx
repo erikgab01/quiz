@@ -8,6 +8,8 @@ export default function Question(props) {
         "&#039;": "'",
         "&quot;": '"',
         "&amp;": "&",
+        "&ldquo;": "“",
+        "&rdquo;": "”",
         // add more if needed
     };
     return (

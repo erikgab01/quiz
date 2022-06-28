@@ -92,14 +92,14 @@ export default function Quiz(props) {
                     Check answers
                 </button>
             ) : (
-                <>
-                    <p>
+                <div className={styles.resultBlock}>
+                    <p className={styles.result}>
                         You scored {correctQuestions}/{questions.length} correct answers
                     </p>
-                    <button onClick={props.playAgain} className={styles.checkButton + " btn"}>
+                    <button onClick={props.playAgain} className={styles.playAgainButton + " btn"}>
                         Play again
                     </button>
-                </>
+                </div>
             )}
         </div>
     );

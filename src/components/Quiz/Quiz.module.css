@@ -15,9 +15,40 @@
     margin-top: 10px;
 }
 
+.playAgainButton {
+    font-weight: 600;
+    font-size: 10px;
+    line-height: 12px;
+    border-radius: 10px;
+    padding: 10px 20px;
+    margin-top: 10px;
+}
+
+.result {
+    font-weight: 700;
+    font-size: 12px;
+    line-height: 15px;
+    text-align: center;
+    color: #293264;
+}
+
+.resultBlock {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
+
 @media screen and (min-width: 800px) {
     .checkButton {
         font-size: 26px;
         padding: 20px 90px;
+    }
+    .playAgainButton {
+        font-size: 26px;
+        padding: 20px 40px;
+    }
+    .result {
+        font-size: 22px;
+        line-height: 15px;
     }
 }
