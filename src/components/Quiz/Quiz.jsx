@@ -1,44 +1,15 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import Question from "../Question/Question";
 import styles from "./Quiz.module.css";
-import { nanoid } from "nanoid";
-import { useLoading } from "react-use-loading";
+import useQuestions from "../../hooks/useQuestions";
 
 export default function Quiz(props) {
     const [questions, setQuestions] = useState([]);
     const [gameEnded, setGameEnded] = useState(false);
     const [correctQuestions, setCorrectQuestions] = useState(0);
-    const [{ isLoading }, { stop }] = useLoading(true);
 
-    useEffect(() => {
-        let category = props.categoryId !== 0 ? `&category=${props.categoryId}` : "";
-        fetch(`https://opentdb.com/api.php?amount=${props.amount}${category}`)
-            .then((response) => response.json())
-            .then((data) => {
-                let questions = data.results.map((question) => {
-                    let answerList = [...question.incorrect_answers, question.correct_answer];
-                    let answers = answerList.map((answer) => {
-                        return { id: nanoid(), title: answer, selected: false };
-                    });
-                    shuffleArray(answers);
-                    return {
-                        id: nanoid(),
-                        question: question.question,
-                        correctAnswer: question.correct_answer,
-                        answers: answers,
-                    };
-                });
-                setQuestions(questions);
-                stop();
-            });
-    }, [props.amount, props.categoryId, stop]);
-
-    function shuffleArray(array) {
-        for (let i = array.length - 1; i > 0; i--) {
-            const j = Math.floor(Math.random() * (i + 1));
-            [array[i], array[j]] = [array[j], array[i]];
-        }
-    }
+    const { status, error, isFetching } = useQuestions(props.amount, props.categoryId, setQuestions);
+    console.log(isFetching);
 
     function setSelected(event, questionId, answerId) {
         setQuestions((oldQuestions) =>
@@ -70,10 +41,15 @@ export default function Quiz(props) {
         setCorrectQuestions(correctQuestion);
         setGameEnded(true);
     }
+    // status === "success" is not used, as background refetching does not change status
+    if (isFetching) {
+        return <></>;
+    }
+    if (status === "error") {
+        return <div className="error">Error: {error.message}</div>;
+    }
 
-    return isLoading ? (
-        <div></div>
-    ) : (
+    return (
         <div className={styles.quiz}>
             {questions.map((question) => (
                 <Question

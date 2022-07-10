@@ -6,7 +6,7 @@
 
 body {
     font-family: "Inter", sans-serif;
-    background: url("blob_blue.png") no-repeat, url("blob_yellow.png") no-repeat;
+    background: url("img/blob_blue.png") no-repeat, url("img/blob_yellow.png") no-repeat;
     background-size: 300px, 300px;
     background-position: left bottom, right top;
     background-color: #f5f7fb;
@@ -27,4 +27,16 @@ body {
 
 .btn:active {
     box-shadow: inset 5px 5px 10px -3px rgba(0, 0, 0, 0.7);
+}
+
+.error {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 700;
+    font-size: 31px;
+    line-height: 37px;
+    text-align: center;
+    color: rgb(211, 13, 13);
 }

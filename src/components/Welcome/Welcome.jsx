@@ -1,18 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import styles from "./Welcome.module.css";
-import { useLoading } from "react-use-loading";
+import useCategories from "../../hooks/useCategories";
 
 export default function Welcome(props) {
-    const [{ isLoading }, { stop }] = useLoading(true);
-    const [categoryList, setCategoryList] = useState([]);
-    useEffect(() => {
-        fetch("https://opentdb.com/api_category.php")
-            .then((response) => response.json())
-            .then((data) => {
-                setCategoryList(data.trivia_categories);
-                stop();
-            });
-    }, [stop]);
+    const { status, data, error } = useCategories();
     function handleChangeCategory(event) {
         props.setSettings((oldSettings) => {
             return { ...oldSettings, category: event.target.value };
@@ -23,9 +14,13 @@ export default function Welcome(props) {
             return { ...oldSettings, amount: event.target.value };
         });
     }
-    return isLoading ? (
-        <div></div>
-    ) : (
+    if (status === "loading") {
+        return <></>;
+    }
+    if (status === "error") {
+        return <div className="error">Error: {error.message}</div>;
+    }
+    return (
         <section className={styles.welcome}>
             <h1 className={styles.title}>Quizzical</h1>
             <p className={styles.description}>A simple quiz game</p>
@@ -34,7 +29,7 @@ export default function Welcome(props) {
                 <label htmlFor="category">Select category</label>
                 <select id="category" value={props.settings.category} onChange={handleChangeCategory}>
                     <option value={0}>Any</option>
-                    {categoryList.map((category) => (
+                    {data.map((category) => (
                         <option key={category.id} value={category.id}>
                             {category.name}
                         </option>

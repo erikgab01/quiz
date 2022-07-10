@@ -1,28 +1,36 @@
 import React, { useState } from "react";
 import Quiz from "./components/Quiz/Quiz";
 import Welcome from "./components/Welcome/Welcome";
+import { QueryClient, QueryClientProvider } from "react-query";
+
+const queryClient = new QueryClient({
+    defaultOptions: {
+        queries: {
+            refetchOnWindowFocus: false,
+        },
+    },
+});
 
 function App() {
-    const [quizState, setQuizState] = useState(false);
+    const [quizStarted, setQuizStarted] = useState(false);
     const [settings, setSettings] = useState({ category: 0, amount: 5 });
 
     return (
-        <div>
-            {!quizState && (
-                <Welcome
-                    settings={settings}
-                    setSettings={setSettings}
-                    setQuizState={() => setQuizState(true)}
-                />
-            )}
-            {quizState && (
+        <QueryClientProvider client={queryClient}>
+            {quizStarted ? (
                 <Quiz
                     amount={settings.amount}
                     categoryId={settings.category}
-                    playAgain={() => setQuizState(false)}
+                    playAgain={() => setQuizStarted(false)}
+                />
+            ) : (
+                <Welcome
+                    settings={settings}
+                    setSettings={setSettings}
+                    setQuizState={() => setQuizStarted(true)}
                 />
             )}
-        </div>
+        </QueryClientProvider>
     );
 }
 
